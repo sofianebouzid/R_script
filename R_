@@ -1,0 +1,33 @@
+# Load necessary library for file manipulation
+library(tools)
+library(jpeg) # For JPEG image file handling
+library(png) # For PNG image file handling
+library(tiff) # For TIFF image file handling
+
+# Define the directory containing the image files
+input_directory <- "/Users/e/"
+files <- list.files("/Users/ṕes/", full.names = TRUE)
+# Define the output directory
+output_directory <- "/Users/s"
+
+# Create the output directory if it doesn't exist
+if (!dir.exists(output_directory)) {
+  dir.create(output_directory)
+}
+
+# List all image files in the directory
+image_files <- list.files(files, full.names = TRUE, pattern = "\\.(jpg|jpeg|png|tif|tiff|jp2)$", recursive = TRUE)
+
+# Loop through each image file and copy it to the output directory
+for (image_file in image_files) {
+  # Determine the file extension
+  file_ext <- tools::file_ext(image_file)
+  
+  # Generate a new unique file name for the output file
+  output_file <- file.path(output_directory, paste0("image_", basename(image_file)))
+  
+  # Copy the image file to the output directory
+  file.copy(image_file, output_file)
+  
+  
+}
